@@ -115,12 +115,16 @@ app.post('/signin', async(req,res) => {
   })
 
   if (!user) return res.status(401).send({
-    error: 'Email address or password not valid'
+    error: {
+      'login':'Email address or password not valid'
+    }
   })
 
   const checkPassword = bcrypt.compareSync(data.password, user.password)
   if (!checkPassword) return res.status(401).send({
-    error: 'Email address or password not valid'
+    error: {
+      'login':'Email address or password not valid'
+    }
   })
 
   const accessToken = await signAccessToken(user)
