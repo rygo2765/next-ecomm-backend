@@ -1,9 +1,9 @@
 import express from 'express'
 import bcrypt from "bcryptjs"
 import { Prisma } from '@prisma/client'
-import prisma from '../utils/prisma'
-import {validateUser} from "../validators/users"
-import {filter} from "../utils/common"
+import prisma from '../utils/prisma.js'
+import {validateUser} from "../validators/users.js"
+import {filter} from "../utils/common.js"
 
 const router = express.Router()
 
