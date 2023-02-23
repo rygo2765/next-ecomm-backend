@@ -1,8 +1,8 @@
 import express from 'express'
 import bcrypt from "bcryptjs"
-import prisma from '../utils/prisma'
-import { validateLogin } from "../validators/auth"
-import { signAccessToken } from '../utils/jwt'
+import prisma from '../utils/prisma.js'
+import { validateLogin } from "../validators/auth.js"
+import { signAccessToken } from '../utils/jwt.js'
 
 const router = express.Router()
 
