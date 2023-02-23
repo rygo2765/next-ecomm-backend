@@ -11,7 +11,7 @@ async function cleanupDatabase() {
   );
 }
 
-describe("POST /signin", () => {
+describe("POST /auth", () => {
   const dummy = {
     email: 'john9@example.com',
     password: 'insecure',
@@ -20,12 +20,6 @@ describe("POST /signin", () => {
   beforeAll(async () => {
     await cleanupDatabase()
     //make a user in database
-    const user = {
-      name: 'John',
-      email: 'john9@example.com',
-      password: 'insecure',
-    }
-    await request(app).post("/users").send(user)
   })
 
   afterAll(async () => {
@@ -33,9 +27,15 @@ describe("POST /signin", () => {
   })
 
   it("with valid credentials should return accessToken", async () => {
+    const user = {
+      name: 'John',
+      email: 'john9@example.com',
+      password: 'insecure',
+    }
+    await request(app).post("/users").send(user)
     const response = await request(app)
-      .post("/signin")
-      .send(dummy)
+      .post("/auth")
+      .send(user)
       .set('Accept','application/json')
     expect(response.statusCode).toBe(200);
     expect(response.body.accessToken).toBeTruthy;
@@ -44,7 +44,7 @@ describe("POST /signin", () => {
   it("with incorrect email should fail and not return accessToken", async () => {
     dummy.email = "wrong@example.com"
     const response = await request(app)
-      .post("/signin")
+      .post("/auth")
       .send(dummy)
       .set('Accept','application/json')
     expect(response.statusCode).toBe(401);
@@ -56,7 +56,7 @@ describe("POST /signin", () => {
   it("with incorrect password should fail and not return accessToken", async () => {
     dummy.password = "wrongpassword"
     const response = await request(app)
-      .post("/signin")
+      .post("/auth")
       .send(dummy)
       .set('Accept', 'application/json')
     expect(response.statusCode).toBe(401);

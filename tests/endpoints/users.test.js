@@ -28,21 +28,34 @@ describe("POST /users", () => {
   })
 
   it("with valid data should return 200", async () => {
+    const newUser ={
+    name: 'John',
+    email: 'john1@example.com',
+    password:'insecure'
+    }
     const response = await request(app)
       .post("/users")
-      .send(user)
+      .send(newUser)
       .set('Accept', 'application/json')
     expect(response.statusCode).toBe(200);
     expect(response.body.id).toBeTruthy;
-    expect(response.body.name).toBe(user.name);
-    expect(response.body.email).toBe(user.email);
+    expect(response.body.name).toBe(newUser.name);
+    expect(response.body.email).toBe(newUser.email);
     expect(response.body.password).toBe(undefined);
   });
 
   it("with same email should fail", async () => {
+    const duplicateUser = {
+      name: 'John',
+      email: 'john2@example.com',
+      password: 'insecure'
+    }
+
+    await request(app).post("/users").send(duplicateUser)
+
     const response = await request(app)
       .post("/users")
-      .send(user)
+      .send(duplicateUser)
       .set('Accept', 'application/json')
     expect(response.statusCode).toBe(500);
     expect(response.body.error).toBeTruthy;
