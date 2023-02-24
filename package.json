@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "npx dotenv -e .env.test prisma migrate deploy && npx dotenv -e .env.test jest -i",
     "start": "npx dotenv -e .env.development node server.js",
@@ -17,6 +17,7 @@
     "@sendgrid/mail": "^7.7.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
     "prisma": "^4.10.1"

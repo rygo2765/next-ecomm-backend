@@ -4,6 +4,10 @@ import { Prisma } from '@prisma/client'
 import prisma from '../utils/prisma.js'
 import {validateUser} from "../validators/users.js"
 import {filter} from "../utils/common.js"
+import sgMail from '@sendgrid/mail'
+
+const emailAPI = process.env.SENDGRID_API_KEY
+sgMail.setApiKey(emailAPI)
 
 const router = express.Router()
 
@@ -20,7 +24,25 @@ router.post('/', async (req, res) => {
 
   prisma.user.create({
     data
-  }).then(user => {
+  })
+  .then(user => {
+    const msg = {
+      to: `${data.email}`, // Change to your recipient
+      from: 'throwhot69420@gmail.com', // Change to your verified sender
+      subject: 'Welcome to Next-Ecomm',
+      text: `Hi ${data.name},\n\nThank you for signing up! We're excited to have you on board.\n\nBest regards, \nThe Next-Ecomm team`,
+    }
+
+    sgMail
+      .send(msg)
+      .then((response) => {
+        console.log(response[0].statusCode)
+        console.log(response[0].headers)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+
     return res.json(filter(user, 'id', 'name', 'email'))
 
   }).catch(err => {
