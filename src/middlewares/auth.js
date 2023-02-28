@@ -1,4 +1,3 @@
-import { verify } from 'jsonwebtoken'
 import {verifyAccessToken} from '../utils/jwt.js'
 
 export default async function auth(req, res, next) {
