@@ -24,8 +24,8 @@ model Images {
   ownerId     Int
   title       String
   description String
-  price       Float
-  url         String 
+  price       Int
+  url         String    @unique
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }
