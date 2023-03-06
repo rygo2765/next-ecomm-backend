@@ -4,6 +4,7 @@ import userRouter from "./src/controllers/users.controllers.js"
 import authRouter from "./src/controllers/auth.controllers.js"
 import uploadRouter from "./src/controllers/upload.controllers.js"
 import imageRouter from "./src/controllers/images.controllers.js"
+import paymentRouter from "./src/controllers/payment.controllers.js"
 import morgan from "morgan"
 import auth from "./src/middlewares/auth.js"
 
@@ -16,6 +17,7 @@ app.use('/users', userRouter)
 app.use('/auth', authRouter)
 app.use('/upload', uploadRouter)
 app.use('/images', imageRouter)
+app.use('/payment', paymentRouter)
 
 
 app.get('/protected', auth, (req,res) => {
