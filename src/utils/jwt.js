@@ -17,6 +17,7 @@ export function verifyAccessToken(token) {
   return new Promise((resolve,reject) => {
     jwt.verify(token, accessTokenSecret, (err,payload) => {
       if (err) {
+        //ternary operator, if condition err.name == 'JsonWebTokenError' is true, assign 'Unauthorized' to message; if false, assign err.message to message
         const message = err.name == 'JsonWebTokenError' ? 'Unauthorized' : err.message
         return reject(message)
       }

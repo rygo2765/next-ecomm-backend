@@ -17,7 +17,7 @@ export function validateUser(input) {
     validationErrors['password'] = 'should be at least 8 characters'
   }
 
-  if ('email' in input && !input['email'].match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+  if ('email' in input && !input['email'].match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) && !input['email'].length == 0) {
     validationErrors['email'] = 'is invalid'
   }
 

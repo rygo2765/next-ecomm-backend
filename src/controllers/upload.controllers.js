@@ -4,6 +4,8 @@ import auth from '../middlewares/auth.js'
 
 const router = express.Router()
 
+//router.post(routePath,[middleware],routeHandler)
+//middleware executes before routeHandler
 router.post('/',auth, async (req, res) => {
   let data = req.body
 
