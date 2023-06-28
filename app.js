@@ -10,15 +10,18 @@ import morgan from "morgan"
 import auth from "./src/middlewares/auth.js"
 
 const app = express()
-app.use(morgan('combined'))
+
 app.use(express.json())
 app.use(cors())
+app.use(morgan('combined'))
+
 
 app.use('/users', userRouter)
 app.use('/auth', authRouter)
 app.use('/upload', uploadRouter)
 app.use('/images', imageRouter)
 app.use('/payment', paymentRouter)
+// app.use('/checkout', paymentRouter)
 app.use('/auth-refresh', authRefeshRouter)
 
 app.get('/protected', auth, (req,res) => {

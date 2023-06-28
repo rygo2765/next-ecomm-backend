@@ -19,6 +19,7 @@ export function verifyAccessToken(token) {
       if (err) {
         //ternary operator, if condition err.name == 'JsonWebTokenError' is true, assign 'Unauthorized' to message; if false, assign err.message to message
         const message = err.name == 'JsonWebTokenError' ? 'Unauthorized' : err.message
+        console.log(message)
         return reject(message)
       }
       resolve(payload)

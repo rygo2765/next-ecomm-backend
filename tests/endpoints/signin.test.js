@@ -11,6 +11,7 @@ async function cleanupDatabase() {
   );
 }
 
+
 describe("POST /auth", () => {
   const dummy = {
     email: 'john9@example.com',

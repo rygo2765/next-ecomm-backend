@@ -11,6 +11,7 @@ async function cleanupDatabase() {
   );
 }
 
+
 describe("POST /users", () => {
   const user = {
     name: 'John',

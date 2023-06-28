@@ -43,7 +43,7 @@ router.post('/', async (req, res) => {
         console.error(error)
       })
 
-    return res.json(filter(user, 'id', 'name', 'email'))
+      res.json(filter(user, 'id', 'name', 'email'))
 
   }).catch(err => {
     if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2002') {
@@ -59,3 +59,4 @@ router.post('/', async (req, res) => {
 })
 
 export default router
+// module.exports = router
